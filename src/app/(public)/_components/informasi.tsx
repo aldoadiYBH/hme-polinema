@@ -9,62 +9,51 @@ import {
 import {
     Card,
     CardContent,
-    // CardDescription,
-    // CardFooter,
-    // CardHeader,
-    // CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+
+const prokers = [
+    {
+        title: "Open Recruitment Staff Ahli",
+        slug: "program-1-ss",
+    },
+    {
+        title: "Workshop Desain Elektronika",
+        slug: "program-fffs",
+    },
+    {
+        title: "Kegiatan Bakti Sosial",
+        slug: "program-s",
+    },
+];
 
 export default function InformasiSection() {
     return (
         <div className="">
-            <Carousel className="relative"
+            <Carousel
+                className="relative"
                 opts={{
                     align: "start",
                     loop: true
                 }}
             >
                 <CarouselContent>
-                    <CarouselItem className="md:basis-1/3">
-                        <div className="p-1">
-                            <Card>
-                                <CardContent className="w-full h-full">
-                                    <p>Pemilihan Ketua Kelas</p>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/3">
-                        <div className="p-1">
-                            <Card>
-                                <CardContent className="w-full h-full">
-                                    <p>Pemilihan Ketua Kelas</p>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/3">
-                        <div className="p-1">
-                            <Card>
-                                <CardContent className="w-full h-full">
-                                    <p>Pemilihan Ketua Kelas</p>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/3">
-                        <div className="p-1">
-                            <Card>
-                                <CardContent className="w-full h-full">
-                                    <p>Pemilihan Ketua Kelas</p>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </CarouselItem>
+                    {prokers.map((item, index) => (
+                        <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3">
+                            <div className="p-1">
+                                <a href={`/program-kerja/${item.slug}`}>
+                                    <Card className="hover:shadow-md transition">
+                                        <CardContent className="p-4">
+                                            <p className="font-semibold">{item.title}</p>
+                                        </CardContent>
+                                    </Card>
+                                </a>
+                            </div>
+                        </CarouselItem>
+                    ))}
                 </CarouselContent>
                 <CarouselPrevious />
                 <CarouselNext />
             </Carousel>
         </div>
-    )
+    );
 }
