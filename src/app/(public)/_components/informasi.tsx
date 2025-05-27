@@ -17,8 +17,8 @@ import {
 
 export default function InformasiSection() {
     return (
-        <div className="w-full px-4">
-            <Carousel
+        <div className="">
+            <Carousel className="relative"
                 opts={{
                     align: "start",
                     loop: true

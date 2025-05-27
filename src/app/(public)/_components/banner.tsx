@@ -7,9 +7,10 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 const images = [
-    "https://picsum.photos/id/1015/1600/600",
-    "https://picsum.photos/id/1003/1600/600",
-    "https://picsum.photos/id/1039/1600/600",
+    "/assets/banner/banner-1.jpg",
+    "/assets/banner/banner-2.jpg",
+    "/assets/banner/banner-3.jpg",
+    "/assets/banner/banner-4.jpg",
 ];
 
 export default function BannerSection() {
@@ -29,7 +30,7 @@ export default function BannerSection() {
                 <CarouselContent>
                     {images.map((img, index) => (
                         <CarouselItem key={index}>
-                            <img src={img} alt={`banner ${index + 1}`} className="w-full h-[250px] md:h-[400px] object-cover md:rounded-xl grayscale hover:grayscale-0 transition-all duration-500" />
+                            <img src={img} alt={`banner ${index + 1}`} className="w-full h-[250px] md:h-[450px] object-fill md:rounded-xl grayscale hover:grayscale-0 transition-all duration-500" />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
