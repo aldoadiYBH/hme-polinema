@@ -63,7 +63,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+      {/* 
       <section className="py-16">
         <div className="min-h-64 py-5 px-6 flex flex-col md:flex-row gap-x-44 gap-y-10 items-center justify-between">
           <div className="md:w-1/2">
@@ -75,7 +75,7 @@ export default function HomePage() {
             <i className="fa-light fa-calendars"></i>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="py-16 bg-accent">
         <div className="min-h-64 py-5 px-6 flex flex-col md:flex-row gap-x-44 gap-y-10 items-center justify-between">
