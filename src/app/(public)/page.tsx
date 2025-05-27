@@ -77,7 +77,7 @@ export default function HomePage() {
         </div>
       </section> */}
 
-      <section className="py-16 bg-accent">
+      <section className="py-16">
         <div className="min-h-64 py-5 px-6 flex flex-col md:flex-row gap-x-44 gap-y-10 items-center justify-between">
           <div className="md:w-1/2 h-full flex md:justify-center text-9xl">
             <i className="fa-light fa-database"></i>
@@ -90,7 +90,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 bg-accent">
         <div className="min-h-64 py-5 px-6 flex flex-col md:flex-row gap-x-44 gap-y-10 items-center justify-between">
           <div className="md:w-1/2">
             <h3 className="mb-2 text-5xl font-bold">Galeri HME</h3>
