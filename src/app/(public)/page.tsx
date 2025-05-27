@@ -53,13 +53,13 @@ export default function HomePage() {
 
       <section className="py-16 bg-accent">
         <div className="min-h-64 py-5 px-6 flex flex-col md:flex-row gap-x-44 gap-y-10 items-center justify-between">
-          <div className="md:w-1/2 h-full flex md:justify-center text-9xl">
-            <i className="fa-thin fa-users-line"></i>
-          </div>
           <div className="md:w-1/2">
             <h3 className="mb-2 text-5xl font-bold">Badan Pengurus Harian</h3>
             <p className="mb-2 text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sint inventore nesciunt voluptate laudantium accusantium maxime praesentium culpa adipisci fugit.</p>
             <Link href={"/pengurus"} className={buttonVariants({ variant: "default" })}>Lihat <i className="fa-light fa-arrow-right"></i></Link>
+          </div>
+          <div className="md:w-1/2 h-full flex md:justify-center text-9xl order-first">
+            <i className="fa-thin fa-users-line"></i>
           </div>
         </div>
       </section>
@@ -79,13 +79,13 @@ export default function HomePage() {
 
       <section className="py-16">
         <div className="min-h-64 py-5 px-6 flex flex-col md:flex-row gap-x-44 gap-y-10 items-center justify-between">
-          <div className="md:w-1/2 h-full flex md:justify-center text-9xl">
-            <i className="fa-light fa-database"></i>
-          </div>
           <div className="md:w-1/2">
             <h3 className="mb-2 text-5xl font-bold">Database HME</h3>
             <p className="mb-2 text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sint inventore nesciunt voluptate laudantium accusantium maxime praesentium culpa adipisci fugit.</p>
             <Link href={"database-hme"} className={buttonVariants({ variant: "default" })}>Lihat <i className="fa-light fa-arrow-right"></i></Link>
+          </div>
+          <div className="md:w-1/2 h-full flex md:justify-center text-9xl order-first md:order-last">
+            <i className="fa-light fa-database"></i>
           </div>
         </div>
       </section>
@@ -97,7 +97,7 @@ export default function HomePage() {
             <p className="mb-2 text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sint inventore nesciunt voluptate laudantium accusantium maxime praesentium culpa adipisci fugit.</p>
             <Link href={"/galery"} className={buttonVariants({ variant: "default" })}>Lihat <i className="fa-light fa-arrow-right"></i></Link>
           </div>
-          <div className="md:w-1/2 h-full flex order-first md:order-last md:justify-center text-9xl">
+          <div className="md:w-1/2 h-full flex md:justify-center text-9xl order-first">
             <i className="fa-light fa-rectangle-vertical-history"></i>
           </div>
         </div>
