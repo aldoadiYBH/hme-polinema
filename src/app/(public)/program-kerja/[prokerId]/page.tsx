@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import Image from "next/image";
 
 const programList = [
     {
         slug: "program-1-ss",
         title: "Open Recruitment Staff Ahli",
-        image: "https://picsum.photos/800/400",
+        image: "/assets/placeholder.jpg",
         content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut itaque perferendis
     in voluptates unde magnam, aspernatur ipsam aperiam tenetur illum autem nam, 
     inventore sequi quisquam. Doloremque qui ipsa delectus quia expedita nam labore nisi dolorum fuga fugiat? Ipsam amet 
@@ -17,7 +17,7 @@ const programList = [
     {
         slug: "program-fffs",
         title: "Workshop Desain Elektronika",
-        image: "https://picsum.photos/800/400",
+        image: "/assets/placeholder.jpg",
         content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut itaque perferendis
     in voluptates unde magnam, aspernatur ipsam aperiam tenetur illum autem nam, 
     inventore sequi quisquam. Doloremque qui ipsa delectus quia expedita nam labore nisi dolorum fuga fugiat? Ipsam amet 
@@ -29,7 +29,7 @@ const programList = [
     {
         slug: "program-s",
         title: "Kegiatan Bakti Sosial",
-        image: "https://picsum.photos/800/400",
+        image: "/assets/placeholder.jpg",
         content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut itaque perferendis
     in voluptates unde magnam, aspernatur ipsam aperiam tenetur illum autem nam, 
     inventore sequi quisquam. Doloremque qui ipsa delectus quia expedita nam labore nisi dolorum fuga fugiat? Ipsam amet 
@@ -40,16 +40,13 @@ const programList = [
     }
 ];
 
-export async function generateMetadata({ params }: { params: { prokerId: string } }): Promise<Metadata> {
-    const program = programList.find(p => p.slug === params.prokerId);
-    return {
-        title: program?.title ?? "Program Kerja",
-        description: `Detail program kerja ${program?.title ?? ""} oleh HME Polinema.`,
-    };
-}
-
-export default function ProgramKerjaDetail({ params }: { params: { prokerId: string } }) {
-    const program = programList.find(p => p.slug === params.prokerId);
+export default async function ShowProker({
+    params
+}: {
+    params: Promise<{ prokerId: string }>
+}) {
+    const { prokerId } = await params;
+    const program = programList.find(p => p.slug === prokerId);
 
     if (!program) return notFound();
 
@@ -58,7 +55,7 @@ export default function ProgramKerjaDetail({ params }: { params: { prokerId: str
             <h1 className="text-4xl font-bold tracking-tight">{program.title}</h1>
 
             <div className="w-full rounded-lg overflow-hidden">
-                <img
+                <Image
                     src={program.image}
                     alt={program.title}
                     width={800}
