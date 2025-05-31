@@ -10,9 +10,14 @@ import {
 import Banner from "./_components/banner";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function InformasiPage({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
+
+  if (!await prisma.category.findFirst({where: {name: category}})){
+    return notFound();
+  }
 
   const data = await prisma.informasi.findMany({
     where: {
