@@ -12,7 +12,7 @@ import {
 import SidebarSection from "./sidebar";
 import { Button } from "@/components/ui/button";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export default async function Header() {
   const categories = await prisma.category.findMany({
