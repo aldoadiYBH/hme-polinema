@@ -36,13 +36,15 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-background text-foreground">
 
-        <Header />
+        <AuthProvider>
+          <Header />
 
-        <main className="flex-1"> 
-          <AuthProvider>{children}</AuthProvider>
-        </main>
+          <main className="flex-1">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
