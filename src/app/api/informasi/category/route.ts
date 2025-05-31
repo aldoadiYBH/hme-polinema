@@ -20,9 +20,9 @@ export async function POST(req: NextRequest) {
         if (!name || typeof name !== "string" || !name.trim()) {
             return NextResponse.json({ error: "Nama kategori tidak valid" }, { status: 400 })
         }
-
+        
         const exists = await prisma.category.findFirst({
-            where: { name: name.trim() }
+            where: { name: name.trim().toLowerCase() }
         })
 
         if (exists) {
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
         const newCategory = await prisma.category.create({
             data: {
-                name: name.trim()
+                name: name.trim().toLowerCase()
             }
         })
 

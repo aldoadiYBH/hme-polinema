@@ -143,7 +143,7 @@ export default function InformasiTable() {
                                 key={cat.id}
                                 className="flex justify-between items-center border px-3 py-1 rounded-md bg-muted/50"
                             >
-                                <span>{cat.name}</span>
+                                <span>{(cat.name.charAt(0).toUpperCase() + cat.name.slice(1))}</span>
                                 <Button
                                     variant="destructive"
                                     size="sm"
@@ -165,7 +165,7 @@ export default function InformasiTable() {
                         <SelectContent>
                             <SelectItem value="all">Semua Kategori</SelectItem>
                             {categories.map(cat => (
-                                <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
+                                <SelectItem key={cat.id} value={cat.id}>{(cat.name.charAt(0).toUpperCase() + cat.name.slice(1))}</SelectItem>
                             ))}
                         </SelectContent>
                     </Select>
@@ -204,7 +204,7 @@ export default function InformasiTable() {
                                 >
                                     <TableCell className="font-medium">
                                         <div className="flex flex-col">
-                                            <Link href={`/informasi/${item.slug}`} className="hover:underline">
+                                            <Link href={`/informasi/${item.category.name}/${item.slug}`} className="hover:underline">
                                                 {item.title}
                                             </Link>
                                             <span className="text-xs text-muted-foreground">{item.slug}</span>
