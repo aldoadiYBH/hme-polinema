@@ -61,7 +61,7 @@ export default function GaleriPage() {
           </CardContent>
 
           <div className="p-4 space-y-3">
-            <p className="text-sm">{post.caption}</p>
+            <p className="text-sm overflow-hidden max-h-24">{post.caption}</p>
 
             <div className="space-y-2 text-sm flex flex-col">
               <Link href={`/galery/${post.id}`} className="text-muted-foreground">View all comments</Link>

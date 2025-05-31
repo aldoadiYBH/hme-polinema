@@ -53,7 +53,7 @@ model Database {
 
 model Galery {
   id        String   @id @default(cuid())
-  caption   String
+  caption   String   @db.Text
   images    Json
   comments  Json?
   createdAt DateTime @default(now())

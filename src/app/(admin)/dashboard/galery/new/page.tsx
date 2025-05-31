@@ -90,8 +90,13 @@ export default function CreateGaleryPage() {
         <Textarea
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
+          maxLength={1000}
           placeholder="Tulis caption di sini..."
         />
+        <p className="text-xs text-muted-foreground">
+          {caption.length}/1000 karakter
+        </p>
+
       </div>
 
       <div>

@@ -62,7 +62,7 @@ export default function GaleryDashboard() {
             <TableBody>
               {data.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell>{item.caption}</TableCell>
+                  <TableCell className='max-w-40 overflow-hidden'>{item.caption}</TableCell>
                   <TableCell>{item.images.length}</TableCell>
                   <TableCell className="text-right space-x-2">
                     <Button size="sm" variant="outline" asChild>
