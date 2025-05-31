@@ -1,8 +1,8 @@
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import type { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthOptions } from "next-auth";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -16,7 +16,7 @@ const handler = NextAuth({
           name: "Admin",
           username: process.env.LOGIN_ADMIN,
           password: process.env.LOGIN_PASSWORD,
-        }
+        };
 
         if (
           credentials?.username === hardcodedUser.username &&
@@ -25,10 +25,10 @@ const handler = NextAuth({
           return {
             id: hardcodedUser.id,
             name: hardcodedUser.name,
-          }
+          };
         }
 
-        return null
+        return null;
       },
     }),
   ],
@@ -40,14 +40,16 @@ const handler = NextAuth({
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.user = user
-      return token
+      if (user) token.user = user;
+      return token;
     },
     async session({ session, token }) {
-      if (token.user) session.user = token.user
-      return session
+      if (token.user) session.user = token.user;
+      return session;
     },
   },
-} satisfies NextAuthOptions)
+};
 
-export { handler as GET, handler as POST }
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
