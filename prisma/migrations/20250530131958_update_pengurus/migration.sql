@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `pengurus` MODIFY `nim` VARCHAR(191) NOT NULL,
+    MODIFY `prodi` VARCHAR(191) NOT NULL,
+    MODIFY `socialLink` VARCHAR(191) NOT NULL;

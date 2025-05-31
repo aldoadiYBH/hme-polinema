@@ -1,11 +1,9 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import { FaInstagram, FaXTwitter, FaFacebook, FaLine } from "react-icons/fa6";
+import { FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa6";
+import { Mail } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -24,7 +22,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-xl font-semibold mb-1">Alamat</h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Gedung AS2.08, Jl. Soekarno – Hatta No. 09<br />
+                Gedung AS2.08, Jl. Soekarno - Hatta No. 09<br />
                 Lowokwaru, Kota Malang, Jawa Timur
               </p>
             </div>
@@ -34,10 +32,10 @@ export default function ContactPage() {
             <div>
               <h2 className="text-xl font-semibold mb-2">Media Sosial</h2>
               <div className="flex gap-4 text-muted-foreground text-2xl">
-                <a href="#" aria-label="Instagram" className="hover:text-foreground transition"><FaInstagram /></a>
-                <a href="#" aria-label="X" className="hover:text-foreground transition"><FaXTwitter /></a>
-                <a href="#" aria-label="Facebook" className="hover:text-foreground transition"><FaFacebook /></a>
-                <a href="#" aria-label="LINE" className="hover:text-foreground transition"><FaLine /></a>
+                <a href="https://www.instagram.com/hmepolinema" aria-label="Instagram" className="hover:text-foreground transition"><FaInstagram /></a>
+                <a href="https://www.youtube.com/@hmepolinema6144" aria-label="X" className="hover:text-foreground transition"><FaYoutube /></a>
+                <a href="https://www.tiktok.com/@hme.polinema" aria-label="Facebook" className="hover:text-foreground transition"><FaTiktok /></a>
+                <a href="mailto:hmepolinema95@gmail.com" aria-label="LINE" className="hover:text-foreground transition"><Mail  /></a>
               </div>
             </div>
           </CardContent>
@@ -56,17 +54,6 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <Card className="w-full max-w-3xl mx-auto">
-        <CardContent className="p-6 space-y-4">
-          <h2 className="text-xl font-semibold mb-2">Kirim Pesan</h2>
-          <form className="space-y-4">
-            <Input placeholder="Nama Anda" required />
-            <Input type="email" placeholder="Email" required />
-            <Textarea placeholder="Pesan Anda..." rows={5} required />
-            <Button type="submit" className="w-full">Kirim</Button>
-          </form>
-        </CardContent>
-      </Card>
     </div>
   );
 }

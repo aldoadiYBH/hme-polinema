@@ -12,10 +12,9 @@ export default function Footer() {
                 <div className="space-y-2">
                     <h4 className="text-lg font-semibold mb-2">Media Sosial</h4>
                     <div className="flex space-x-4">
-                        <a href="#" className="text-gray-400 hover:text-foreground transition">Instagram</a>
-                        <a href="#" className="text-gray-400 hover:text-foreground transition">X</a>
-                        <a href="#" className="text-gray-400 hover:text-foreground transition">Facebook</a>
-                        <a href="#" className="text-gray-400 hover:text-foreground transition">LINE</a>
+                        <a href="https://www.instagram.com/hmepolinema" className="text-gray-400 hover:text-foreground transition">Instagram</a>
+                        <a href="https://www.tiktok.com/@hme.polinema" className="text-gray-400 hover:text-foreground transition">TikTok</a>
+                        <a href="https://www.youtube.com/@hmepolinema6144" className="text-gray-400 hover:text-foreground transition">YouTube</a>
                     </div>
                 </div>
             </div>

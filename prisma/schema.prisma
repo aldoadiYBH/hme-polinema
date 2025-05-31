@@ -1,0 +1,94 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Informasi {
+  id         String   @id @default(cuid())
+  title      String
+  slug       String   @unique
+  content    Json
+  thumbnail  String? // optional
+  status     String   @default("Draft")
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Category {
+  id        String      @id @default(cuid())
+  name      String
+  informasi Informasi[] // 1-to-many
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Pengurus {
+  id         String   @id @default(cuid())
+  fullname   String
+  jabatan    String
+  ttl        String
+  nim        String
+  prodi      String
+  socialLink String
+  photo      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Database {
+  id          String   @id @default(cuid())
+  name        String
+  link        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Galery {
+  id        String   @id @default(cuid())
+  caption   String
+  images    Json
+  comments  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactMail {
+  id        String   @id @default(cuid())
+  fullname  String
+  email     String
+  messages  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model KritikSaran {
+  id               String   @id @default(cuid())
+  kiritikSaranLink String
+  aspirasiLink     String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ProgramKerja {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   Json
+  thumbnail String?
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}

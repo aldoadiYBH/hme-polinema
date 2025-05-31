@@ -19,6 +19,18 @@ const posts = [
         comments: ["Keren!", "Sukses selalu HME!"],
     },
     {
+        id: 3,
+        images: ["/assets/galery/post-1.jpg", "/assets/galery/post-2.jpg"],
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",
+        comments: ["Keren!", "Sukses selalu HME!"],
+    },
+    {
+        id: 4,
+        images: ["/assets/galery/post-1.jpg", "/assets/galery/post-2.jpg"],
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",
+        comments: ["Keren!", "Sukses selalu HME!"],
+    },
+    {
         id: 2,
         images: ["/assets/galery/post-3.jpg"],
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",

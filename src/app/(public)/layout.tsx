@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Header from "./_components/header";
 import Footer from "./_components/footer";
+import AuthProvider from "@/components/auth/authProvider";
 
 export const metadata: Metadata = {
   title: "HME Polinema",
@@ -37,8 +38,8 @@ export default function RootLayout({
 
         <Header />
 
-        <main className="flex-1">
-          {children}
+        <main className="flex-1"> 
+          <AuthProvider>{children}</AuthProvider>
         </main>
 
         <Footer />
