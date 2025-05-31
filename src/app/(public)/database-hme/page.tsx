@@ -2,11 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText} from "lucide-react";
 import Link from "next/link";
-import prisma from "@/lib/prisma";
+// import prisma from "@/lib/prisma";
 
 export default async function DatabaseHMEPage() {
-  const data = await prisma.database.findMany({ orderBy: { createdAt: "desc" } });
-
+  // const data = await prisma.database.findMany({ orderBy: { createdAt: "desc" } });
+  const data = [
+    {id : 1, name : "Internal", description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, officiis.", link : "#"},
+    {id : 2, name : "Inventaris", description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, officiis.", link : "#"},
+  ];
   return (
     <div>
       <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 space-y-12">
