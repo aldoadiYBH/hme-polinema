@@ -70,14 +70,20 @@ export default async function Header() {
           </Link>
 
           {session ? (
-            <form action="/api/auth/signout" method="POST">
-              <Button variant="outline" type="submit" className="cursor-pointer">Logout</Button>
-            </form>
+            <>
+              <Link href="/dashboard">
+                <Button variant="default" className="cursor-pointer">Dashboard</Button>
+              </Link>
+              <form action="/api/auth/signout" method="POST">
+                <Button variant="outline" type="submit" className="cursor-pointer">Logout</Button>
+              </form>
+            </>
           ) : (
             <Link href="/login">
               <Button variant="default" className="cursor-pointer">Login</Button>
             </Link>
           )}
+
         </div>
 
         {/* Mobile */}
