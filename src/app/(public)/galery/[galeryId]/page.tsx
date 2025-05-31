@@ -1,65 +1,114 @@
-"use client";
+"use client"
 
-import { useParams } from "next/navigation";
+import { useParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { toast } from "sonner"
+import { Share2, Trash } from "lucide-react"
+import { useSession } from "next-auth/react"
 
-import Image from "next/image";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Share2 } from "lucide-react";
-import { toast } from "sonner";
-import { useState } from "react";
-import { Separator } from "@/components/ui/separator";
-
-const posts = [
-    {
-        id: 1,
-        images: ["/assets/galery/post-1.jpg", "/assets/galery/post-2.jpg"],
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",
-        comments: ["Keren!", "Sukses selalu HME!"],
-    },
-    {
-        id: 3,
-        images: ["/assets/galery/post-1.jpg", "/assets/galery/post-2.jpg"],
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",
-        comments: ["Keren!", "Sukses selalu HME!"],
-    },
-    {
-        id: 4,
-        images: ["/assets/galery/post-1.jpg", "/assets/galery/post-2.jpg"],
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",
-        comments: ["Keren!", "Sukses selalu HME!"],
-    },
-    {
-        id: 2,
-        images: ["/assets/galery/post-3.jpg"],
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a commodi, voluptates quam, in nam nemo mollitia ipsa animi iste ratione soluta quae delectus, corrupti sit autem laborum maxime suscipit?",
-        comments: ["MasyaAllah", "Mantap banget!"],
-    },
-];
+interface GaleryPost {
+  id: string
+  caption: string
+  images: string[]
+  comments: string[]
+}
 
 export default function PostDetailPage() {
-  const { galeryId } = useParams();
-  const post = posts.find((p) => p.id === Number(galeryId));
-  const [newComment, setNewComment] = useState("");
+  const { data: session } = useSession()
+  const { galeryId } = useParams()
+  const [post, setPost] = useState<GaleryPost | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [newComment, setNewComment] = useState("")
 
-  if (!post) return <p className="text-center mt-10">Postingan tidak ditemukan.</p>;
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await fetch(`/api/galery/${galeryId}`)
+        const json = await res.json()
+        if (json.success) {
+          setPost({
+            ...json.data,
+            images: json.data.images || [],
+            comments: json.data.comments || [],
+          })
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Gagal memuat galeri")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (galeryId) fetchPost()
+  }, [galeryId])
 
   const handleShare = () => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url);
-    toast.success("Tautan berhasil disalin!");
-  };
+    const url = window.location.href
+    navigator.clipboard.writeText(url)
+    toast.success("Tautan berhasil disalin!")
+  }
 
-  const handleCommentSubmit = () => {
-    if (!newComment.trim()) return;
-    post.comments.push(newComment);
-    setNewComment("");
-  };
+  const handleCommentSubmit = async () => {
+    if (!newComment.trim() || !post) return
+
+    const updatedComments = [...post.comments, newComment]
+
+    try {
+      const res = await fetch(`/api/galery/${galeryId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comments: updatedComments }),
+      })
+
+      if (res.ok) {
+        setPost({ ...post, comments: updatedComments })
+        setNewComment("")
+      } else {
+        toast.error("Gagal menambahkan komentar")
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Terjadi kesalahan")
+    }
+  }
+
+  const handleDeleteComment = async (index: number) => {
+    if (!post) return
+
+    const updatedComments = [...post.comments]
+    updatedComments.splice(index, 1)
+
+    try {
+      const res = await fetch(`/api/galery/${galeryId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comments: updatedComments }),
+      })
+
+      if (res.ok) {
+        setPost({ ...post, comments: updatedComments })
+        toast.success("Komentar dihapus")
+      } else {
+        toast.error("Gagal menghapus komentar")
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Terjadi kesalahan")
+    }
+  }
+
+  if (loading) return <p className="text-center py-10">Memuat...</p>
+  if (!post) return <p className="text-center py-10">Postingan tidak ditemukan.</p>
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* LEFT - Image(s) */}
+      {/* Images */}
       <div className="w-full">
         {post.images.length > 1 ? (
           <Carousel>
@@ -68,7 +117,7 @@ export default function PostDetailPage() {
                 <CarouselItem key={i}>
                   <Image
                     src={img}
-                    alt="Post"
+                    alt={`Post Image ${i + 1}`}
                     width={600}
                     height={600}
                     className="w-full aspect-square object-contain rounded-lg"
@@ -90,21 +139,35 @@ export default function PostDetailPage() {
         )}
       </div>
 
-      {/* RIGHT - Description & Comments */}
+      {/* Caption & Comments */}
       <div className="flex flex-col justify-between space-y-6">
         <div>
-          <p className="text-sm mb-4">{post.description}</p>
+          <p className="text-sm mb-4">{post.caption}</p>
 
-          <Separator className="mb-3"/>
-          <div>
-            <ul className="space-y-2 text-sm">
-              {post.comments.map((c, i) => (
-                <li key={i} className="py-1">{c}</li>
-              ))}
-            </ul>
-          </div>
+          <Separator className="mb-3" />
+          <ul className="space-y-2 text-sm">
+            {post.comments.map((comment, index) => (
+              <li
+                key={index}
+                className="flex justify-between items-center group hover:bg-muted px-2 py-1 rounded"
+              >
+                <span>{comment}</span>
+                {session?.user && (
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    onClick={() => handleDeleteComment(index)}
+                    className="invisible group-hover:visible text-red-500"
+                  >
+                    <Trash className="w-4 h-4" />
+                  </Button>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
 
+        {/* Comment Form */}
         <div className="space-y-2">
           <Textarea
             placeholder="Tulis komentar..."
@@ -120,5 +183,5 @@ export default function PostDetailPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

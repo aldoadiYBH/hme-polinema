@@ -11,23 +11,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import SidebarSection from "./sidebar";
 import { Button } from "@/components/ui/button";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function Header() {
   const categories = await prisma.category.findMany({
     orderBy: { name: "asc" },
   });
 
+  const session = await getServerSession(authOptions);
+
   return (
     <header className="sticky top-0 z-50 bg-background/70 border-b border-accent backdrop-blur-lg text-foreground">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo and Title */}
+        {/* Logo */}
         <div className="flex items-center md:gap-x-3 gap-1">
           <Image src="/assets/LOGO-HME.png" alt="Logo HME" width={40} height={40} className="object-cover" />
           <Image src="/assets/Logo-JTE-Color-New.png" alt="Logo JTE" width={40} height={40} className="object-cover" />
           <h1 className="text-2xl font-bold">HME POLINEMA</h1>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Menu */}
         <div className="space-x-1 hidden md:flex items-center">
           <Link href="/" className="px-3 py-1 rounded-xl hover:bg-accent hover:text-accent-foreground transition">
             Beranda
@@ -39,7 +43,6 @@ export default async function Header() {
                 Info <i className="fa-light fa-chevron-down"></i>
               </button>
             </DropdownMenuTrigger>
-
             <DropdownMenuContent>
               <DropdownMenuGroup>
                 {categories.map((cat, i) => (
@@ -66,14 +69,20 @@ export default async function Header() {
             Kritik & Saran
           </Link>
 
-          <Link href={'/login'}>
-            <Button variant={"default"} className="cursor-pointer">Login</Button>
-          </Link>
+          {session ? (
+            <form action="/api/auth/signout" method="POST">
+              <Button variant="outline" type="submit" className="cursor-pointer">Logout</Button>
+            </form>
+          ) : (
+            <Link href="/login">
+              <Button variant="default" className="cursor-pointer">Login</Button>
+            </Link>
+          )}
         </div>
 
-        {/* Mobile Sidebar Toggle */}
+        {/* Mobile */}
         <div className="md:hidden">
-          <SidebarSection categories={categories}/>
+          <SidebarSection categories={categories} />
         </div>
       </nav>
     </header>

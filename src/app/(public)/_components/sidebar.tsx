@@ -1,7 +1,8 @@
-// components/_components/sidebar.tsx
 "use client"
 
 import { useState } from "react"
+import { signOut, useSession } from "next-auth/react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -20,13 +21,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { Menu } from "lucide-react"
-import Link from "next/link"
 
 type SidebarProps = {
   categories: { id: string; name: string }[]
 }
 
 export default function SidebarSection({ categories }: SidebarProps) {
+  const { data: session } = useSession()
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
   return (
@@ -89,9 +90,19 @@ export default function SidebarSection({ categories }: SidebarProps) {
             Kritik & Saran
           </Link>
 
-          <Link href="/login">
-            <Button className="mt-2 w-full">Login</Button>
-          </Link>
+          {session ? (
+            <Button
+              variant="outline"
+              className="mt-2 w-full"
+              onClick={() => signOut({ callbackUrl: "/" })}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Link href="/login">
+              <Button className="mt-2 w-full">Login</Button>
+            </Link>
+          )}
         </div>
       </SheetContent>
     </Sheet>

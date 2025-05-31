@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const body = await req.json();
-    const {id} = await params;
+    const { id } = await params;
     const updatedGalery = await prisma.galery.update({
       where: { id },
       data: body,
@@ -35,7 +35,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const {id} = await params;
+    const { id } = await params;
     await prisma.galery.delete({
       where: { id },
     });
@@ -43,5 +43,26 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   } catch (err) {
     console.error('DELETE galery error:', err);
     return NextResponse.json({ error: 'Failed to delete galery' }, { status: 500 });
+  }
+}
+
+export async function PATCH(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const body = await req.json()
+    const {id} = await params;  
+    const updated = await prisma.galery.update({
+      where: { id },
+      data: {
+        comments: body.comments,
+      },
+    })
+
+    return NextResponse.json({ success: true, data: updated })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: "Failed to update" }, { status: 500 })
   }
 }
