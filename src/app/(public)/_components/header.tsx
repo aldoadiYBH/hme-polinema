@@ -73,7 +73,7 @@ export default async function Header() {
 
         {/* Mobile Sidebar Toggle */}
         <div className="md:hidden">
-          <SidebarSection />
+          <SidebarSection categories={categories}/>
         </div>
       </nav>
     </header>
