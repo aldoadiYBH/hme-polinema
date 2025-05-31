@@ -105,6 +105,9 @@ export default function SidebarSection() {
                             <Link key={item.title} href={`${item.url}`} className="px-3 py-1 hover:bg-accent hover:text-accent-foreground transition focus:outline-0">{item.title}</Link>
                         )
                     ))}
+                    <Link href={'/login'}>
+                        <Button variant={"default"} className="cursor-pointer">Login</Button>
+                    </Link>
 
                     {/* <DropdownMenu>
                         <DropdownMenuTrigger asChild>
