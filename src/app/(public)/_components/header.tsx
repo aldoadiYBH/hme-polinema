@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-// import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,15 +12,9 @@ import {
 import SidebarSection from "./sidebar";
 
 export default async function Header() {
-  // const categories = await prisma.category.findMany({
-  //   orderBy: { name: "asc" },
-  // });
-  const categories = [
-    {id : 1, name : "Pengumuman"},
-    {id : 2, name : "Beasiswa"},
-    {id : 3, name : "Lowongan Kerja"},
-  ];
-
+  const categories = await prisma.category.findMany({
+    orderBy: { name: "asc" },
+  });
 
   return (
     <header className="sticky top-0 z-50 bg-background/70 border-b border-accent backdrop-blur-lg text-foreground">
