@@ -6,14 +6,14 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-const images = [
-    "/assets/banner/banner-1.jpg",
-    "/assets/banner/banner-2.jpg",
-    "/assets/banner/banner-3.jpg",
-    "/assets/banner/banner-4.jpg",
-];
 
 export default function BannerSection() {
+    const images = [
+        "/assets/banner/banner-1.jpg",
+        "/assets/banner/banner-2.jpg",
+        "/assets/banner/banner-3.jpg",
+        // "/assets/banner/banner-4.jpg",
+    ];
 
     return (
         <div className="max-w-6xl mx-auto">

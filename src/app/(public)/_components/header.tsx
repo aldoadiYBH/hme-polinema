@@ -26,8 +26,8 @@ export default async function Header() {
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center md:gap-x-3 gap-1">
-          <Image src="/assets/LOGO-HME.png" alt="Logo HME" width={40} height={40} className="object-cover" />
-          <Image src="/assets/Logo-JTE-Color-New.png" alt="Logo JTE" width={40} height={40} className="object-cover" />
+          <Image src="/assets/Logo-JTE-Color-New.png" alt="Logo JTE" width={60} height={60} className="object-cover" />
+          <Image src="/assets/LOGO-HME.png" alt="Logo HME" width={50} height={50} className="object-cover" />
           <h1 className="text-2xl font-bold">HME POLINEMA</h1>
         </div>
 
